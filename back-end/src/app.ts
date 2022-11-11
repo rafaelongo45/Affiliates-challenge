@@ -37,6 +37,16 @@ app.post("/", upload.single("file"), async (req: Request, res: Response) => {
   }
 });
 
+app.get("/transactions", async (req: Request, res: Response) => {
+  try {
+    const transactions = await prisma.transactions.findMany();
+    return res.status(200).send(transactions);
+  } catch (e) {
+    console.log(e);
+    return res.sendStatus(500);
+  }
+});
+
 const port = +process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server is up and running on port ${port}!`);
