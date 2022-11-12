@@ -5,18 +5,19 @@ function App() {
   const [file, setFile] = useState("");
   const [transactions, setTransactions] = useState();
   const baseUrl = process.env.REACT_APP_API_BASEURL;
-  let totalValue;
+  let totalValue = 0;
   let manufacturerSales;
   let affiliatesSales;
 
-  const submitForm = () => {
+  function submitForm(e) {
+    e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
 
-    axios.post(baseUrl, formData).then((res) => {
+    axios.post(`${baseUrl}transactions`, formData).then((res) => {
       alert("file uploaded!");
     });
-  };
+  }
 
   if (transactions) {
     const transaction = calculateValue(transactions);
@@ -30,15 +31,18 @@ function App() {
   useEffect(() => {
     axios
       .get(`${baseUrl}transactions`)
-      .then((res) => setTransactions(res.data))
+      .then((res) => {
+        setTransactions(res.data);
+      })
       .catch((err) => console.log(err));
   }, [baseUrl]);
+
   console.log(transactions);
   return (
     <>
       <form>
         <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-        <button onClick={submitForm}> Submit </button>
+        <button onClick={(e) => submitForm(e)}> Submit </button>
       </form>
       {transactions ? (
         <>
@@ -89,7 +93,9 @@ function calculateValue(transactions) {
   let sum = 0;
   let affiliatesSales = [];
   let manufacturerSales = [];
-  transactions.forEach((transaction) => {
+
+  for (let i = 0; i < transactions.length; i++) {
+    const transaction = transactions[i];
     const isSum =
       transaction.type === 1 ||
       transaction.type === 2 ||
@@ -108,7 +114,7 @@ function calculateValue(transactions) {
     } else {
       sum -= transaction.value;
     }
-  });
+  }
 
   return {
     totalSum: sum / 100,
