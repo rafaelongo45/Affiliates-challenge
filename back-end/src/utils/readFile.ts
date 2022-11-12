@@ -1,10 +1,12 @@
 import * as fs from "fs/promises";
 import { Transactions } from "@prisma/client";
 
-async function readFile() {
-  const filePath = `./src/uploads/sales.txt`;
+async function readFile(fileName: string) {
+  const filePath = `./src/uploads/${fileName}`;
   const fileObj: Transactions[] = [];
   const file = await fs.readFile(filePath);
+  await fs.unlink(filePath);
+
   const fileDataArray = file.toString().trim().split(/\r?\n/);
   for (let i = 0; i < fileDataArray.length; i++) {
     const data = fileDataArray[i];
@@ -12,11 +14,13 @@ async function readFile() {
     for (let j = 0; j < data.length; j++) {
       if (j === 0) {
         const type = parseInt(data[j]);
+        checkType(type);
         dataObj = { ...dataObj, type };
       }
 
       if (j === 1) {
         const date = new Date(data.substring(1, 26));
+        checkDate(date);
         dataObj = { ...dataObj, date };
       }
 
@@ -26,7 +30,9 @@ async function readFile() {
       }
 
       if (j === 56) {
-        const value = parseInt(data.substring(56, 66));
+        const valueString = data.substring(56, 66);
+        checkValue(valueString);
+        const value = parseInt(valueString);
         dataObj = { ...dataObj, value };
       }
 
@@ -39,10 +45,43 @@ async function readFile() {
     }
   }
 
-  await fs.unlink(filePath);
   return fileObj;
 }
 
 export default readFile;
 
 //TODO: Rewrite this function!
+
+function checkType(type: number) {
+  const isValid = type === 1 || type === 2 || type === 3 || type === 4;
+  if (!isValid) {
+    throw {
+      type: "structureError",
+      message: "Type must be 1, 2, 3 or 4",
+      code: 400,
+    };
+  }
+}
+
+function checkDate(date: Date) {
+  const today = new Date();
+  const isValid = date < today;
+  if (!isValid) {
+    throw {
+      type: "dateError",
+      message: "Can't insert a transaction that happened in the future",
+      code: 400,
+    };
+  }
+}
+
+function checkValue(value: string) {
+  const isInvalid = value.includes(",") || value.includes(".")
+  if (!isInvalid) {
+    throw {
+      type: "valueError",
+      message: "Must send value in 'centavos'",
+      code: 400,
+    };
+  }
+}

@@ -13,9 +13,21 @@ async function findAll() {
   return transactions;
 }
 
+async function findOne(transaction: Transactions) {
+  const dbTransaction = await prisma.transactions.findFirst({
+    where: {
+      type: transaction.type,
+      date: transaction.date,
+      seller: transaction.seller,
+    },
+  });
+  return dbTransaction;
+}
+
 const transactionsRepository = {
   insertOne,
   findAll,
+  findOne,
 };
 
 export default transactionsRepository;

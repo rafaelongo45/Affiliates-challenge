@@ -17,4 +17,6 @@ model Transactions {
   product     String
   value       Int
   seller      String
+
+  @@unique([type, date, seller])
 }
