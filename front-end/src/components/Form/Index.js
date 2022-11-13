@@ -29,5 +29,3 @@ function RenderForm({ file, setFile }) {
 }
 
 export default RenderForm;
-
-//TODO: Commit - Fixes infinite rendering when getting data from database and updates transactions component when a file is sent successfully to the database

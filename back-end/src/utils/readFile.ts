@@ -1,7 +1,7 @@
 import * as fs from "fs/promises";
 import { Transactions } from "@prisma/client";
 
-async function readFile(fileName: string) {
+async function fileReader(fileName: string) {
   const filePath = `./src/uploads/${fileName}`;
   const fileObj: Transactions[] = [];
   const file = await fs.readFile(filePath);
@@ -48,6 +48,10 @@ async function readFile(fileName: string) {
   return fileObj;
 }
 
+const readFile = {
+  fileReader,
+};
+
 export default readFile;
 
 //TODO: Rewrite this function!
@@ -76,7 +80,7 @@ function checkDate(date: Date) {
 }
 
 function checkValue(value: string) {
-  const isInvalid = value.includes(",") || value.includes(".")
+  const isInvalid = value.includes(",") || value.includes(".");
   if (!isInvalid) {
     throw {
       type: "valueError",

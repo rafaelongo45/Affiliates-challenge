@@ -8,7 +8,7 @@ async function findAllTransactions() {
 }
 
 async function insertTransactions(fileName: string) {
-  const fileData = await readFile(fileName);
+  const fileData = await readFile.fileReader(fileName);
   for (let i = 0; i < fileData.length; i++) {
     const transaction = fileData[i];
 
