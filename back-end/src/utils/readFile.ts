@@ -81,7 +81,7 @@ function checkDate(date: Date) {
 
 function checkValue(value: string) {
   const isInvalid = value.includes(",") || value.includes(".");
-  if (!isInvalid) {
+  if (isInvalid) {
     throw {
       type: "valueError",
       message: "Must send value in 'centavos'",
