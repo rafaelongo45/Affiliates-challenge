@@ -1,58 +1,15 @@
-import axios from "axios";
 import { useContext } from "react";
 import styled from "styled-components";
 import { AiFillFileAdd, AiFillFileText } from "react-icons/ai";
 
 import MessageContext from "../../contexts/MessageContext.js";
+import formHandler from "./formSubmitter.js";
 
 function RenderForm({ file, setFile }) {
-  const baseUrl = process.env.REACT_APP_API_BASEURL;
   const { setMessage } = useContext(MessageContext);
 
-  function submitForm(e) {
-    e.preventDefault();
-    if (file === "") {
-      setMessage({
-        hasMessage: true,
-        message: "You must select a file before submitting!",
-      });
-      return;
-    }
-
-    const isFileValid = file.name.substr(-3) === "txt";
-    if (!isFileValid) {
-      setMessage({
-        hasMessage: true,
-        message: "You must send a text file!",
-        code: "",
-      });
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("file", file);
-
-    axios
-      .post(`${baseUrl}transactions`, formData)
-      .then((res) => {
-        setMessage({
-          hasMessage: true,
-          message: "File sent to database!",
-          code: "",
-        });
-        setFile("");
-      })
-      .catch((err) =>
-        setMessage({
-          hasMessage: true,
-          message: err.response.data,
-          code: "",
-        })
-      );
-  }
-
   return (
-    <Form>
+    <Form role="form">
       <InputWrapper>
         {file ? (
           <>
@@ -65,9 +22,18 @@ function RenderForm({ file, setFile }) {
             <p>Select a file to upload</p>
           </>
         )}
-        <FormInput type="file" onChange={(e) => setFile(e.target.files[0])} />
+        <FormInput
+          role={"contentInfo"}
+          type="file"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
       </InputWrapper>
-      <FormSubmit onClick={(e) => submitForm(e)}> Submit </FormSubmit>
+      <FormSubmit
+        role={"button"}
+        onClick={(e) => formHandler.submitForm(e, file, setFile, setMessage)}
+      >
+        Submit
+      </FormSubmit>
     </Form>
   );
 }
@@ -83,7 +49,7 @@ const Form = styled.form`
   padding-top: 20px;
   border: 1px solid grey;
   border-radius: 8px;
-  background-color: #EFEFEF;
+  background-color: #efefef;
 `;
 
 const InputWrapper = styled.div`

@@ -8,8 +8,8 @@ function RenderSales({ sales, title }) {
     minimumFractionDigits: 2,
   });
   return (
-    <>
-      <Title>{title} Sales</Title>
+    <SalesComponent role={"section"}>
+      <Title role={"title"}>{title} Sales</Title>
       <SalesWrapper>
         {sales.map((transaction) => {
           return (
@@ -23,11 +23,13 @@ function RenderSales({ sales, title }) {
       <Value>
         <span>Total Value:</span> {totalValue}
       </Value>
-    </>
+    </SalesComponent>
   );
 }
 
 export default RenderSales;
+
+const SalesComponent = styled.section``
 
 const SalesWrapper = styled.div`
   width: 80%;

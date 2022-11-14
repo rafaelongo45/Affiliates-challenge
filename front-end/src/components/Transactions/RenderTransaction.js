@@ -16,7 +16,7 @@ function RenderTransaction({ transaction }) {
 
   const hour = transaction.date.slice(11, 16) + "h";
   return (
-    <Sale>
+    <Sale role={"article"}>
       <p>
         {product} - {date} {hour}
       </p>
@@ -29,7 +29,7 @@ function RenderTransaction({ transaction }) {
 
 export default RenderTransaction;
 
-const Sale = styled.div`
+const Sale = styled.article`
   margin: 10px 0 5px 8px;
 
   p {

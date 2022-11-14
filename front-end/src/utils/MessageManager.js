@@ -15,7 +15,7 @@ function RenderMessage() {
     5000
   );
   return (
-    <ErrorWrapper>
+    <ErrorWrapper role={"error"}>
       <Message>{message.message}</Message>
     </ErrorWrapper>
   );

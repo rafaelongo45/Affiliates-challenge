@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 
 import RenderForm from "../Form/Index.js";
-import RenderMessage from "../../utils/RenderMessage.js";
+import RenderMessage from "../../utils/MessageManager";
 import RenderTransactions from "../Transactions/Index.js";
 import MessageContext from "../../contexts/MessageContext.js";
 
@@ -38,11 +38,17 @@ function App() {
 
       <Main>
         <RenderForm file={file} setFile={setFile} />
-        <ButtonsWrapper>
-          <Button onClick={() => setSelectedTransaction("Manufacturer")}>
+        <ButtonsWrapper role={"group"}>
+          <Button
+            role={"button"}
+            onClick={() => setSelectedTransaction("Manufacturer")}
+          >
             Manufacturer
           </Button>
-          <Button onClick={() => setSelectedTransaction("Affiliates")}>
+          <Button
+            role={"button"}
+            onClick={() => setSelectedTransaction("Affiliates")}
+          >
             Affiliates
           </Button>
         </ButtonsWrapper>
