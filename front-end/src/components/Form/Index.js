@@ -3,17 +3,17 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { AiFillFileAdd, AiFillFileText } from "react-icons/ai";
 
-import ErrorContext from "../../contexts/ErrorContext.js";
+import MessageContext from "../../contexts/MessageContext.js";
 
 function RenderForm({ file, setFile }) {
   const baseUrl = process.env.REACT_APP_API_BASEURL;
-  const { setError } = useContext(ErrorContext);
+  const { setMessage } = useContext(MessageContext);
 
   function submitForm(e) {
     e.preventDefault();
     if (file === "") {
-      setError({
-        hasError: true,
+      setMessage({
+        hasMessage: true,
         message: "You must select a file before submitting!",
       });
       return;
@@ -21,8 +21,8 @@ function RenderForm({ file, setFile }) {
 
     const isFileValid = file.name.substr(-3) === "txt";
     if (!isFileValid) {
-      setError({
-        hasError: true,
+      setMessage({
+        hasMessage: true,
         message: "You must send a text file!",
         code: "",
       });
@@ -35,12 +35,16 @@ function RenderForm({ file, setFile }) {
     axios
       .post(`${baseUrl}transactions`, formData)
       .then((res) => {
-        alert("file uploaded!");
+        setMessage({
+          hasMessage: true,
+          message: "File sent to database!",
+          code: "",
+        });
         setFile("");
       })
       .catch((err) =>
-        setError({
-          hasError: true,
+        setMessage({
+          hasMessage: true,
           message: err.response.data,
           code: "",
         })
@@ -79,7 +83,7 @@ const Form = styled.form`
   padding-top: 20px;
   border: 1px solid grey;
   border-radius: 8px;
-  background-color: #e8dfca;
+  background-color: #EFEFEF;
 `;
 
 const InputWrapper = styled.div`

@@ -3,17 +3,17 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 
 import RenderForm from "../Form/Index.js";
-import RenderError from "../../utils/RenderError.js";
+import RenderMessage from "../../utils/RenderMessage.js";
 import RenderTransactions from "../Transactions/Index.js";
-import ErrorContext from "../../contexts/ErrorContext.js";
+import MessageContext from "../../contexts/MessageContext.js";
 
 function App() {
   const [file, setFile] = useState("");
   const [transactions, setTransactions] = useState();
   const [selectedTransaction, setSelectedTransaction] = useState("");
-  const [error, setError] = useState({
+  const [message, setMessage] = useState({
     code: "",
-    hasError: false,
+    hasMessage: false,
     message: "",
   });
   const baseUrl = process.env.REACT_APP_API_BASEURL;
@@ -24,8 +24,8 @@ function App() {
         setTransactions(res.data);
       })
       .catch((err) =>
-        setError({
-          hasError: true,
+        setMessage({
+          hasMessage: true,
           message: "Can't connect to database",
           code: err.code,
         })
@@ -33,8 +33,8 @@ function App() {
   }, [file, baseUrl]);
 
   return (
-    <ErrorContext.Provider value={{ error, setError }}>
-      {error.hasError ? <RenderError /> : ""}
+    <MessageContext.Provider value={{ message, setMessage }}>
+      {message.hasMessage ? <RenderMessage /> : ""}
 
       <Main>
         <RenderForm file={file} setFile={setFile} />
@@ -56,7 +56,7 @@ function App() {
           ""
         )}
       </Main>
-    </ErrorContext.Provider>
+    </MessageContext.Provider>
   );
 }
 
@@ -82,11 +82,12 @@ const ButtonsWrapper = styled.div`
 `;
 
 const Button = styled.button`
+  cursor: pointer;
   border: none;
   border-radius: 6px;
   width: 110px;
   height: 25px;
-  background-color: #ffb9b9;
+  background-color: #a4a4a4;
   font-size: 15px;
   color: white;
   font-weight: bold;

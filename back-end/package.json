@@ -7,7 +7,9 @@
   "scripts": {
     "build": "tsc",
     "test": "dotenv -e .env.test prisma migrate dev && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i --coverage --collectCoverageFrom=src/services/*.ts",
-    "dev": "nodemon ./src/app.ts"
+    "dev": "nodemon ./src/app.ts",
+    "prisma:deploy": "prisma migrate deploy",
+    "start": "npm run prisma:deploy && node dist/src/app.js"
   },
   "keywords": [],
   "author": "",

@@ -1,27 +1,27 @@
 import { useContext } from "react";
 import styled from "styled-components";
 
-import ErrorContext from "../contexts/ErrorContext.js";
+import MessageContext from "../contexts/MessageContext.js";
 
-function RenderError() {
-  const { error, setError } = useContext(ErrorContext);
+function RenderMessage() {
+  const { message, setMessage } = useContext(MessageContext);
   setTimeout(
     () =>
-      setError({
-        hasError: false,
+      setMessage({
+        hasMessage: false,
         message: "",
-        code:''
+        code: "",
       }),
-    3000
+    5000
   );
   return (
     <ErrorWrapper>
-      <Message>{error.message}</Message>
+      <Message>{message.message}</Message>
     </ErrorWrapper>
   );
 }
 
-export default RenderError;
+export default RenderMessage;
 
 const ErrorWrapper = styled.div`
   display: flex;
