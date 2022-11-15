@@ -1,24 +1,23 @@
-import { Transactions } from "@prisma/client";
-
 import prisma from "../config/db.js";
+import { TransactionsFile } from "../utils/readFile.js";
 
-async function insertOne(transaction: Transactions) {
+async function insertOne(transaction: TransactionsFile, sellerId: number) {
   await prisma.transactions.create({
-    data: transaction,
+    data: {
+      type: transaction.type,
+      value: transaction.value,
+      date: transaction.date,
+      product: transaction.product,
+      sellerId,
+    },
   });
 }
 
-async function findAll() {
-  const transactions = await prisma.transactions.findMany();
-  return transactions;
-}
-
-async function findOne(transaction: Transactions) {
+async function findOne(transaction: TransactionsFile) {
   const dbTransaction = await prisma.transactions.findFirst({
     where: {
       type: transaction.type,
       date: transaction.date,
-      seller: transaction.seller,
     },
   });
   return dbTransaction;
@@ -26,7 +25,6 @@ async function findOne(transaction: Transactions) {
 
 const transactionsRepository = {
   insertOne,
-  findAll,
   findOne,
 };
 

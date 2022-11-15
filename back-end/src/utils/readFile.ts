@@ -1,16 +1,23 @@
 import * as fs from "fs/promises";
-import { Transactions } from "@prisma/client";
+
+export interface TransactionsFile {
+  type: number;
+  date: Date;
+  value: number;
+  seller: string;
+  product: string;
+}
 
 async function fileReader(fileName: string) {
   const filePath = `./src/uploads/${fileName}`;
-  const fileObj: Transactions[] = [];
+  const fileObj: TransactionsFile[] = [];
   const file = await fs.readFile(filePath);
   await fs.unlink(filePath);
 
   const fileDataArray = file.toString().trim().split(/\r?\n/);
   for (let i = 0; i < fileDataArray.length; i++) {
     const data = fileDataArray[i];
-    let dataObj: Transactions;
+    let dataObj: TransactionsFile;
     for (let j = 0; j < data.length; j++) {
       if (j === 0) {
         const type = parseInt(data[j]);
@@ -53,8 +60,6 @@ const readFile = {
 };
 
 export default readFile;
-
-//TODO: Rewrite this function!
 
 function checkType(type: number) {
   const isValid = type === 1 || type === 2 || type === 3 || type === 4;

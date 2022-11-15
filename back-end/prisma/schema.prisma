@@ -16,7 +16,14 @@ model Transactions {
   date        DateTime
   product     String
   value       Int
-  seller      String
+  sellerId    Int
+  seller      Sellers @relation(fields: [sellerId], references: [id])
 
-  @@unique([type, date, seller])
+  @@unique([type, date])
+}
+
+model Sellers {
+  id          Int @id @default(autoincrement())
+  seller      String
+  Transactions  Transactions[]
 }

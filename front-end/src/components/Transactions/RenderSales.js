@@ -2,21 +2,18 @@ import styled from "styled-components";
 import { calculateValue } from "../../utils/transactionsCalculator";
 import RenderTransaction from "./RenderTransaction";
 
-function RenderSales({ sales, title }) {
-  const transaction = calculateValue(sales);
-  const totalValue = transaction.totalSum.toLocaleString("pt-br", {
+function RenderSales({ sales, title, index }) {
+  const sum = calculateValue(sales[index].Transactions);
+  const totalValue = sum.toLocaleString("pt-br", {
     minimumFractionDigits: 2,
   });
   return (
     <SalesComponent role={"section"}>
-      <Title role={"title"}>{title} Sales</Title>
+      <Title role={"title"}>{title}'s Transactions</Title>
       <SalesWrapper>
-        {sales.map((transaction) => {
+        {sales[index].Transactions.map((transaction) => {
           return (
-            <RenderTransaction
-              transaction={transaction}
-              key={transaction.date + transaction.seller}
-            />
+            <RenderTransaction transaction={transaction} key={transaction.id} />
           );
         })}
       </SalesWrapper>
@@ -29,12 +26,12 @@ function RenderSales({ sales, title }) {
 
 export default RenderSales;
 
-const SalesComponent = styled.section``
+const SalesComponent = styled.section``;
 
 const SalesWrapper = styled.div`
   width: 80%;
   max-width: 500px;
-  margin: 10px auto;
+  margin: 10px auto 0 auto;
   max-height: 450px;
   overflow-y: scroll;
   border: 1px solid lightgrey;
@@ -50,11 +47,18 @@ const Title = styled.p`
 `;
 
 const Value = styled.p`
-  margin: 0 auto;
+  margin: -10px auto;
+  padding-top: 20px;
+  border-right: 1px solid lightgrey;
+  border-left: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+  border-radius: 0 0 8px 8px;
+  height: 30px;
   width: 80%;
   max-width: 500px;
 
   span {
     font-weight: bold;
+    padding: 5px;
   }
 `;

@@ -21,8 +21,7 @@ function RenderTransaction({ transaction }) {
         {product} - {date} {hour}
       </p>
       <Separator />
-      <p>Seller: {transaction.seller}</p>
-      <p>Value: R$ {value}</p>
+      <p>Value: {transaction.type === 3 ? "-" : "+"}R$ {value}</p>
     </Sale>
   );
 }

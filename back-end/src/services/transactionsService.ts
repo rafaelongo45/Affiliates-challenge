@@ -1,9 +1,11 @@
-import readFile from "../utils/readFile.js";
-import transactionsRepository from "../repositories/transactionsRepository.js";
 import { Transactions } from "@prisma/client";
 
+import readFile from "../utils/readFile.js";
+import sellersRepository from "../repositories/sellersRepository.js";
+import transactionsRepository from "../repositories/transactionsRepository.js";
+
 async function findAllTransactions() {
-  const transactions = await transactionsRepository.findAll();
+  const transactions = await sellersRepository.findAll();
   return transactions;
 }
 
@@ -14,7 +16,14 @@ async function insertTransactions(fileName: string) {
 
     const dbTransaction = await transactionsRepository.findOne(transaction);
     checkIfExists(dbTransaction);
-    await transactionsRepository.insertOne(transaction);
+    const seller = await sellersRepository.findOne(transaction.seller);
+
+    if (seller) {
+      await transactionsRepository.insertOne(transaction, seller.id);
+    } else {
+      const newSeller = await sellersRepository.insertOne(transaction.seller);
+      await transactionsRepository.insertOne(transaction, newSeller.id);
+    }
   }
 }
 

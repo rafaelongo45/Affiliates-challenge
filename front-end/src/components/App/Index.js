@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 
 import RenderForm from "../Form/Index.js";
+import RenderButton from "./RenderButton.js";
 import RenderMessage from "../../utils/MessageManager";
-import RenderTransactions from "../Transactions/Index.js";
+import RenderSales from "../Transactions/RenderSales.js";
 import MessageContext from "../../contexts/MessageContext.js";
 
 function App() {
@@ -38,25 +39,34 @@ function App() {
 
       <Main>
         <RenderForm file={file} setFile={setFile} />
-        <ButtonsWrapper role={"group"}>
-          <Button
-            role={"button"}
-            onClick={() => setSelectedTransaction("Manufacturer")}
-          >
-            Manufacturer
-          </Button>
-          <Button
-            role={"button"}
-            onClick={() => setSelectedTransaction("Affiliates")}
-          >
-            Affiliates
-          </Button>
-        </ButtonsWrapper>
 
         {transactions ? (
-          <RenderTransactions
-            selectedTransactions={selectedTransaction}
-            transactions={transactions}
+          <ButtonsWrapper role={"group"}>
+            {transactions.map((seller) => {
+              const i = transactions.findIndex(
+                (obj) => obj.seller === seller.seller
+              );
+
+              return (
+                <RenderButton
+                  key={seller.seller + i}
+                  setSelectedTransaction={setSelectedTransaction}
+                  name={seller.seller}
+                  i={i}
+                  selectedTransaction={selectedTransaction}
+                />
+              );
+            })}
+          </ButtonsWrapper>
+        ) : (
+          ""
+        )}
+
+        {selectedTransaction !== "" ? (
+          <RenderSales
+            sales={transactions}
+            title={selectedTransaction.nameParsed}
+            index={selectedTransaction.i}
           />
         ) : (
           ""
@@ -80,21 +90,11 @@ const Main = styled.main`
 
 const ButtonsWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
-  width: 70%;
+  width: 80%;
   max-width: 500px;
   margin: 0 auto;
-  padding-top: 20px;
-`;
-
-const Button = styled.button`
-  cursor: pointer;
-  border: none;
-  border-radius: 6px;
-  width: 110px;
-  height: 25px;
-  background-color: #a4a4a4;
-  font-size: 15px;
-  color: white;
-  font-weight: bold;
+  height: fit-content;
+  margin-top: 20px;
 `;
