@@ -2,24 +2,24 @@ import { render, screen } from "@testing-library/react";
 
 import RenderSales from "./components/Transactions/RenderSales";
 
-const sales = [
+const transactionsData = [
   {
-    date: "2022-01-15T19:20:30-03:00",
-    product: "KILLER QUEEN",
     seller: "Kira Yoshikage",
-    value: 99999,
-  },
-  {
-    date: "2022-01-15T19:23:30-03:00",
-    product: "The world",
-    seller: "Dio",
-    value: 99999,
+    Transactions: [
+      {
+        id: 1,
+        date: "2022-01-15T19:20:30-03:00",
+        product: "KILLER QUEEN",
+        sellerId: 1,
+        value: 99999,
+      },
+    ],
   },
 ];
 
 describe("Sales component", () => {
   test("Should render a sale", () => {
-    render(<RenderSales sales={sales} title={"JOJO"} />);
+    render(<RenderSales sales={transactionsData} title={"JOJO"} index={0} />);
     const section = screen.getByRole("section");
     expect(section).toBeInTheDocument();
   });

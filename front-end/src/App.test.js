@@ -10,11 +10,10 @@ describe("App component", () => {
     expect(form).toBeInTheDocument();
   });
 
-  test("Should have a div with two buttons", () => {
+  test("Should have a div with one button", () => {
     render(<App />);
-    const buttonsDiv = screen.getByRole("group");
-    expect(buttonsDiv).toHaveTextContent("Affiliates");
-    expect(buttonsDiv).toHaveTextContent("Manufacturer");
+    const buttonsDiv = screen.getByRole("button");
+    expect(buttonsDiv).toBeInTheDocument();
   });
 });
 
