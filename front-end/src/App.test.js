@@ -3,21 +3,6 @@ import { render, screen } from "@testing-library/react";
 
 import App from "./components/App/Index.js";
 
-const transactions = [
-  {
-    date: "2022-01-15T19:20:30-03:00",
-    product: "KILLER QUEEN",
-    seller: "Kira Yoshikage",
-    value: 99999,
-  },
-  {
-    date: "2022-01-15T19:23:30-03:00",
-    product: "The world",
-    seller: "Dio",
-    value: 99999,
-  },
-];
-
 describe("App component", () => {
   test("Should have a form", () => {
     render(<App />);

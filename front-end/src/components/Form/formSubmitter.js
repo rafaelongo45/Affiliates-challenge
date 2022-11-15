@@ -24,7 +24,7 @@ function submitForm(e, file, setFile, setMessage) {
 
   const formData = new FormData();
   formData.append("file", file);
-
+  console.log(file);
   axios
     .post(`${baseUrl}transactions`, formData)
     .then((res) => {
@@ -45,7 +45,7 @@ function submitForm(e, file, setFile, setMessage) {
 }
 
 const formHandler = {
-  submitForm
-}
+  submitForm,
+};
 
 export default formHandler;

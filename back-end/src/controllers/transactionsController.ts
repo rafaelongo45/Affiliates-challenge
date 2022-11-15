@@ -10,7 +10,7 @@ async function getAllTransactions(req: Request, res: Response) {
 async function insertTransactionsFile(req: Request, res: Response) {
   const fileName = req.file.filename;
   await transactionsService.insertTransactions(fileName);
-  return res.sendStatus(200);
+  return res.sendStatus(201);
 }
 
 const transactionsController = {
