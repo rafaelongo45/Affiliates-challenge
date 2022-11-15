@@ -1,11 +1,11 @@
 ## 📝 Table of Contents
-#
+
 - [Installation](#installation)
 - [Running Tests](#tests)
 - [Used Libraries](#libraries)
 
 ## ⚙️ Installation <a name = "installation"></a>
-#
+
 
 ### In this folder
 
@@ -33,7 +33,6 @@ npm start
 
 ## 🔧 Running tests <a name = "tests"></a>
 
-#
 
 For all tests
 
