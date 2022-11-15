@@ -10,7 +10,12 @@ async function insertOneTransaction() {
     seller: "Jonas da Silva",
   };
 
-  await transactionsRepository.insertOne(data);
+  const seller = {
+    id: 1,
+    seller: "Jonas da Silva",
+  };
+
+  await transactionsRepository.insertOne(data, seller.id);
   return data;
 }
 
@@ -34,8 +39,21 @@ async function insertTwoTransactions() {
     },
   ];
 
-  await transactionsRepository.insertOne(data[0]);
-  await transactionsRepository.insertOne(data[1]);
+  const sellers = [
+    {
+      id: 1,
+      seller: "Jonas da Silva",
+    },
+    {
+      id: 2,
+      seller: "Jonas Silveira",
+    },
+  ];
+  const transaction = await transactionsRepository.findOne(data[0]);
+  if (!transaction) {
+    await transactionsRepository.insertOne(data[0], sellers[0].id);
+    await transactionsRepository.insertOne(data[1], sellers[1].id);
+  }
   return data;
 }
 

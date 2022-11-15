@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -115,39 +115,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -159,32 +159,32 @@ import readFile from "../utils/readFile.js";
 import sellersRepository from "../repositories/sellersRepository.js";
 import transactionsRepository from "../repositories/transactionsRepository.js";
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >findAllTransactions(</span>) {
-  const transactions = <span class="cstat-no" title="statement not covered" >await sellersRepository.findAll();</span>
-<span class="cstat-no" title="statement not covered" >  return transactions;</span>
+async function findAllTransactions() {
+  const transactions = await sellersRepository.findAll();
+  return transactions;
 }
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >insertTransactions(</span>fileName: string) {
-  const fileData = <span class="cstat-no" title="statement not covered" >await readFile.fileReader(fileName);</span>
-<span class="cstat-no" title="statement not covered" >  for (let i = <span class="cstat-no" title="statement not covered" >0;</span> i &lt; fileData.length; i++) {</span>
-    const transaction = <span class="cstat-no" title="statement not covered" >fileData[i];</span>
+async function insertTransactions(fileName: string) {
+  const fileData = await readFile.fileReader(fileName);
+  for (let i = 0; i &lt; fileData.length; i++) {
+    const transaction = fileData[i];
 &nbsp;
-    const dbTransaction = <span class="cstat-no" title="statement not covered" >await transactionsRepository.findOne(transaction);</span>
-<span class="cstat-no" title="statement not covered" >    checkIfExists(dbTransaction);</span>
-    const seller = <span class="cstat-no" title="statement not covered" >await sellersRepository.findOne(transaction.seller);</span>
+    const dbTransaction = await transactionsRepository.findOne(transaction);
+    checkIfExists(dbTransaction);
+    const seller = await sellersRepository.findOne(transaction.seller);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (seller) {</span>
-<span class="cstat-no" title="statement not covered" >      await transactionsRepository.insertOne(transaction, seller.id);</span>
+    if (seller) {
+      await transactionsRepository.insertOne(transaction, seller.id);
     } else {
-      const newSeller = <span class="cstat-no" title="statement not covered" >await sellersRepository.insertOne(transaction.seller);</span>
-<span class="cstat-no" title="statement not covered" >      await transactionsRepository.insertOne(transaction, newSeller.id);</span>
+      const newSeller = await sellersRepository.insertOne(transaction.seller);
+      await transactionsRepository.insertOne(transaction, newSeller.id);
     }
   }
 }
 &nbsp;
-function <span class="fstat-no" title="function not covered" >checkIfExists(</span>dbTransaction: Transactions) {
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (dbTransaction) {</span>
-<span class="cstat-no" title="statement not covered" >    throw {</span>
+function checkIfExists(dbTransaction: Transactions) {
+  if (dbTransaction) {
+    throw {
       type: "conflictError",
       message: "At least one transaction already exists in the database",
       code: 409,
@@ -192,7 +192,7 @@ function <span class="fstat-no" title="function not covered" >checkIfExists(</sp
   }
 }
 &nbsp;
-const transactionsService = <span class="cstat-no" title="statement not covered" >{</span>
+const transactionsService = {
   findAllTransactions,
   insertTransactions,
 };
@@ -205,7 +205,7 @@ export default transactionsService;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-11-15T07:00:18.116Z
+                at 2022-11-15T15:48:04.186Z
             </div>
         <script src="prettify.js"></script>
         <script>
