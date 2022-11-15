@@ -10,7 +10,7 @@
     "prisma:deploy": "prisma migrate deploy",
     "test": "dotenv -e .env.test prisma migrate dev && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i --testPathPattern=tests/integration/* --forceExit",
     "test:unit": "dotenv -e .env.test cross-env NODE_OPTIONS=--experimental-vm-modules jest -- -i --coverage --collectCoverageFrom=src/services/*.ts --testPathPattern=tests/unit/*",
-    "start": "npm run prisma:deploy && node dist/src/app.js"
+    "start": "npm run prisma:deploy && npm run build && node ./dist/src/app.js"
   },
   "keywords": [],
   "author": "",

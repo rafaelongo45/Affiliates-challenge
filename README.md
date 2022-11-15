@@ -4,175 +4,95 @@
 
 - [About](#about)
 - [Getting Started](#getting_started)
-- [Built Using](#built_using)
-- [Routes](#routes)
-- [Running Tests](#tests)
-- [Used Libraries](#libraries)
+- [When app is running](#running)
 
 ## 📖 About <a name = "about"></a>
 
 This is a challenge by [Coodesh](https://coodesh.com/)
 
-Fullstack application in which a user can upload a *text* file with transactions logs and they will be registered in a sql database. The user will also be able to see logs where 
-
-This application is live at:
-[Website](https://open-food-facts-api.onrender.com)
+Fullstack application in which a user can upload a _text_ file with transactions logs and they will be registered in a sql database. The user will also be able to see transactions separated by sellers.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine.
 
 ### ⚙️ Installing
 
+#
+
 - Clone the repository
-- Instal dependencies
-- Setup your env variables
-- Start the project!
 
-Install dependencies with
+## To run with docker
 
-```
-npm i
-```
+Inside the back-end folder
 
-Setup your .env files
+- Setup your .env.docker file
 
 ```
-DB_CONN_STRING="mongodb://localhost:27017"
-PORT=SELECTED_PORT
-DATABASE="DATABASE_NAME"
-CRON_TIME= "CRON_PATTERN"
+DATABASE_URL=postgresql://POSTGRES-USERNAME:POSTGRES-PASSWORD@db:5432/affiliates-docker
+POSTGRES_USERNAME=POSTGRES-USERNAME
+POSTGRES_PASSWORD=POSTGRES-PASSWORD
+PORT=SELECT-PORT
 ```
 
-If you're running on docker...
+Inside the front-end folder
+
+- Setup your .env.docker file
 
 ```
-DB_CONN_STRING="mongodb://MONGO_IMAGE_TITLE:MONGO_IMAGE_PORT"
-CRON_TIME= "YOUR_CRON_TIME"
-PORT="YOUR_PORT"
-DATABASE="YOUR_DB_NAME"
+REACT_APP_API_BASEURL=http://localhost:5000/
 ```
 
-If you're running without docker, start MongoDB on your computer and keep it running!
+Go back to the root folder
 
-### ⚙️ How to setup the CRON_TIME variable
-
-You can set the string using the "\* \* \* \* \* \*" pattern
-
-```
- # ┌────────────── second (optional)
- # │ ┌──────────── minute
- # │ │ ┌────────── hour
- # │ │ │ ┌──────── day of month
- # │ │ │ │ ┌────── month
- # │ │ │ │ │ ┌──── day of week
- # │ │ │ │ │ │
- # │ │ │ │ │ │
- # * * * * * *
-```
-
-### Example
-
-```
-CRON_TIME = 0 0 2 * * *
-```
-
-This pattern makes the cron execute the function everyday at 02 A.M. The spaces between the characters are important!
-
-To run the project run the command
-
-```
-npm start
-```
-
-To run with docker
+- Open a terminal and run the command
 
 ```
 docker-compose up
 ```
 
-## 🚀 Routes <a name = "routes"></a>
+The application will be up and running in http://localhost:8080
+
+### To run locally
+
+Follow the instructions in the readme file from each folder (front-end and back-end)
+
+## 🏃‍♀️ When application is running <a name = "running"></a>
+
+You can send a **_text_** file and if its contents are correct, the data will be stored in the database
+
+### File format
 
 ```
-GET /
-   - Route to get system info
-   - headers: {}
-   - body:{}
+Field    Start    End      Size      Description
+Type       1       1        1        Transaction type
+Date       2       26       25       Date - ISO Date + GMT
+Product    27      56       30       Product description
+Value      57      66       10       Transaction value in 'centavos'
+Seller     67      86       20       Seller`s name
 ```
 
-```
-GET /products
-   - Route to get all products registered in the database
-   - headers: {}
-   - body:{}
-```
+Example of correct file content
 
 ```
-GET /products?page=n
-   - Route to get 20 products registered in the database. Where "n" is the number of the page you want to check
-   - headers: {}
-   - body:{}
+12022-01-15T19:20:30-03:00CURSO DE BEM-ESTAR            0000012750JOSE CARLOS
+12021-12-03T11:46:02-03:00DOMINANDO INVESTIMENTOS       0000050000MARIA CANDIDA
+22022-01-16T14:13:54-03:00CURSO DE BEM-ESTAR            0000012750THIAGO OLIVEIRA
+32022-01-16T14:13:54-03:00CURSO DE BEM-ESTAR            0000004500THIAGO OLIVEIRA
+42022-01-16T14:13:54-03:00CURSO DE BEM-ESTAR            0000004500JOSE CARLOS
+12022-01-22T08:59:13-03:00DOMINANDO INVESTIMENTOS       0000050000MARIA CANDIDA
+12022-02-01T23:35:43-03:00DESENVOLVEDOR FULL STACK      0000155000ELIANA NOGUEIRA
+22022-02-03T17:23:37-03:00DESENVOLVEDOR FULL STACK      0000155000CARLOS BATISTA
+22022-02-03T20:51:59-03:00DESENVOLVEDOR FULL STACK      0000155000CAROLINA MACHADO
+22022-02-04T07:42:12-03:00DESENVOLVEDOR FULL STACK      0000155000CELSO DE MELO
+32022-02-03T17:23:37-03:00DESENVOLVEDOR FULL STACK      0000050000CARLOS BATISTA
+32022-02-03T20:51:59-03:00DESENVOLVEDOR FULL STACK      0000050000CAROLINA MACHADO
+32022-02-04T07:42:12-03:00DESENVOLVEDOR FULL STACK      0000050000CELSO DE MELO
+42022-02-03T17:23:37-03:00DESENVOLVEDOR FULL STACK      0000050000ELIANA NOGUEIRA
+42022-02-03T20:51:59-03:00DESENVOLVEDOR FULL STACK      0000050000ELIANA NOGUEIRA
+42022-02-04T07:42:12-03:00DESENVOLVEDOR FULL STACK      0000050000ELIANA NOGUEIRA
+12022-02-19T05:33:07-03:00DOMINANDO INVESTIMENTOS       0000050000MARIA CANDIDA
+12022-03-01T02:09:54-03:00CURSO DE BEM-ESTAR            0000012750JOSE CARLOS
+12022-03-03T09:07:35-03:00DESENVOLVEDOR FULL STACK      0000155000ELIANA NOGUEIRA
+12022-03-03T13:12:16-03:00DESENVOLVEDOR FULL STACK      0000155000ELIANA NOGUEIRA
 ```
-
-```
-GET /products/:code
-   - Route to get the product registered with the given code
-   - headers: {}
-   - body:{}
-```
-
-```
-PUT /products/:code
-   - Route to update the product with the given code
-   - headers: {}
-   - body:{
-        quantity,
-        brands,
-        categories,
-        labels,
-        cities,
-        purchase_places,
-        stores,
-        ingredients_text,
-        traces,
-        serving_size,
-        serving_quantity,
-        nutriscore_score,
-        nutriscore_grade,
-        main_category
-    }
-```
-
-```
-DELETE /products/:code
-   - Route to delete product with the given code from the database
-   - headers: {}
-   - body:{}
-```
-
-## 🔧 Running tests <a name = "tests"></a>
-
-The tests check if products service is functioning correctly. It checks the CRUD for the whole project. Run the command
-
-```
-npm run test
-```
-
-## ⛏️ Built Using <a name = "built_using"></a>
-
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
-
-## 📕 Used Libraries <a name = "libraries"></a>
-
-- [axios](https://www.npmjs.com/package/axios)
-- [dotenv](https://www.npmjs.com/package/dotenv)
-- [express](https://www.npmjs.com/package/express)
-- [express-async-errors](https://www.npmjs.com/package/express-async-errors)
-- [joi](https://www.npmjs.com/package/joi)
-- [mongodb](https://www.npmjs.com/package/mongodb)
-- [node-cron](https://www.npmjs.com/package/node-cron)
-- [nodemon](https://www.npmjs.com/package/nodemon)
-- [ts-node](https://www.npmjs.com/package/ts-node)
-- [jest](https://www.npmjs.com/package/jest)
