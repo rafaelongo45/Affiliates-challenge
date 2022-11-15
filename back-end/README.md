@@ -1,6 +1,5 @@
 ## 📝 Table of Contents
 
-#
 
 - [Installation](#installation)
 - [Routes](#routes)
@@ -9,7 +8,6 @@
 
 ## ⚙️ Installation <a name = "installation"></a>
 
-#
 
 ### In this folder
 
@@ -38,7 +36,6 @@ npm start
 
 ## 🚀 Routes <a name = "routes"></a>
 
-#
 
 ```
 GET /transactions
@@ -56,7 +53,6 @@ POST /transactions
 
 ## 🔧 Running tests <a name = "tests"></a>
 
-#
 
 Setup your .env.test file
 
